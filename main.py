@@ -17,3 +17,10 @@ def intro():
     print_sleep("looking right at you.")
     print_sleep("It tries to open the gate, but it is locked.")
     print_sleep("It slowly walks away, as you get to your feet")
+
+
+def play_game():
+    intro()
+
+
+play_game()

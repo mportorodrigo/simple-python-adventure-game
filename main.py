@@ -186,7 +186,7 @@ def combat(items, health, enemies_alive, scene_elements):
         else:
             print_sleep("Your vision darkens as your life escapes you.")
             print_sleep("You didn't manage to scape the dungen this time.")
-            return
+            play_again()
 
         if enemy_health > 0:
             print_sleep("The skeleton attacks you.")
@@ -199,11 +199,25 @@ def combat(items, health, enemies_alive, scene_elements):
             return health
 
 
+# Give the player the option to play again
+def play_again():
+    options = ["Yes", "No"]
+    print_sleep("Would you like to play again?")
+
+    selected_option = validate_option(options)
+
+    while True:
+        if selected_option == 1:
+            play_again()
+        elif selected_option == 2:
+            break
+
+
 # Starts and manages the game
 def play_game():
     # Player statistics
     items = []
-    health = 100
+    health = 10
 
     # Game Logic
     enemies_alive = [True, True, True, True]  # Are the enemies alive?

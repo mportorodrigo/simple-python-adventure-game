@@ -85,9 +85,47 @@ def adjacent_cell(items, health, enemies_alive, scene_elements):
         if selected_option == 1:
             print_sleep("This gate is unlocked.")
             print_sleep("You go out of the cell.")
-            # TODO cell_block(items, health, enemies_alive, scene_elements)
+            cell_block(items, health, enemies_alive, scene_elements)
         elif selected_option == 2:
             middle_cell(items, health, enemies_alive, scene_elements)
+
+
+def cell_block(items, health, enemies_alive, scene_elements):
+    print_sleep("You are now in the dungeon corridor.")
+    options = ["Look around", "Go to the Jailer Room"]
+
+    if enemies_alive[0] == True:
+        if "sword" not in items:
+            print_sleep("The skeleton is at the other end of the corridor.")
+            print_sleep("It has not yet noticed me.")
+            print_sleep("I'd better find a weapon before fighting it.")
+        else:
+            print_sleep("The skeleton is at the other end of the corridor.")
+            print_sleep("It has not yet noticed you.")
+            print_sleep("Now that you have a sword, you might have a chance.")
+            options.append("Fight skeleton.")
+    else:
+        options.append("Opend the door.")
+        options.append("Go through the right passage.")
+        options.append("Go through the left passage.")
+
+    while True:
+        selected_option = validate_option(options)
+
+        if selected_option == 1:
+            print_sleep("You can see that there are only two cells here.")
+            print_sleep("Yours and the one you just came out of.")
+            print_sleep("The jailer room is at the end of this corridor.")
+            print_sleep("There is a door that leads outside at the other end.")
+            print_sleep(
+                "And two passages, oposite to the other, beside that door.")
+            if enemies_alive[0] == True:
+                print_sleep("The skeleton is there.")
+                print_sleep("You will have to defeat it.")
+                print_sleep("Or you will not be able to go out.")
+        if selected_option == 2:
+            # TODO jailer_room(items, health, enemies_alive, scene_elements)
+            break
 
 
 # Starts and manages the game

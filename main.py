@@ -5,7 +5,7 @@ import random
 # Prints text, then wait for two seconds
 def print_sleep(text):
     print(text)
-    time.sleep(2)
+    time.sleep(0)
 
 
 def validate_option(options):
@@ -71,8 +71,23 @@ def middle_cell(items, health, enemies_alive, scene_elements):
                 print_sleep(
                     "The hole is big enough for a person to go through.")
         elif selected_option == 4:
-            # TODO adjacent_cell(items, health, enemies_alive, scene_elements)
-            break
+            adjacent_cell(items, health, enemies_alive, scene_elements)
+
+
+def adjacent_cell(items, health, enemies_alive, scene_elements):
+    print_sleep("You find yourself in the adjacent cell.")
+    print_sleep("It looks much the same as your cell.")
+    options = ["Open the gate.", "Go back to your cell."]
+
+    while True:
+        selected_option = validate_option(options)
+
+        if selected_option == 1:
+            print_sleep("This gate is unlocked.")
+            print_sleep("You go out of the cell.")
+            # TODO cell_block(items, health, enemies_alive, scene_elements)
+        elif selected_option == 2:
+            middle_cell(items, health, enemies_alive, scene_elements)
 
 
 # Starts and manages the game

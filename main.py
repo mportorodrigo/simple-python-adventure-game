@@ -217,10 +217,10 @@ def play_again():
 def play_game():
     # Player statistics
     items = []
-    health = 10
+    health = 30
 
     # Game Logic
-    enemies_alive = [True, True, True, True]  # Are the enemies alive?
+    enemies_alive = [True, True]  # Are the enemies alive?
     scene_elements = [False, False]  # Is the wall broken? the potion drunk?
 
     # Start the game

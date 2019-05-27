@@ -165,6 +165,8 @@ def jailer_room(items, health, enemies_alive, scene_elements):
         if selected_option == 2:
             cell_block(items, health, enemies_alive, scene_elements)
         if selected_option == 3:
+            print_sleep("You take the sword.")
+            print_sleep("Now you might have a chance to scape.")
             items.append("sword")
             options.remove("Take the sword.")
 
@@ -182,7 +184,8 @@ def combat(items, health, enemies_alive, scene_elements):
             print_sleep(f"You have caused {damage_dealt} points of damage.")
             print_sleep(f"It has {enemy_health} health points left.")
         else:
-            print_sleep("The skeleton killed you.")
+            print_sleep("Your vision darkens as your life escapes you.")
+            print_sleep("You didn't manage to scape the dungen this time.")
             return
 
         if enemy_health > 0:

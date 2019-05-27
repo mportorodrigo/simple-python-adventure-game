@@ -5,7 +5,7 @@ import random
 # Prints text, then wait for two seconds
 def print_sleep(text):
     print(text)
-    time.sleep(0)
+    time.sleep(2)
 
 
 def validate_option(options):
@@ -124,8 +124,34 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep("You will have to defeat it.")
                 print_sleep("Or you will not be able to go out.")
         if selected_option == 2:
-            # TODO jailer_room(items, health, enemies_alive, scene_elements)
-            break
+            jailer_room(items, health, enemies_alive, scene_elements)
+
+
+def jailer_room(items, health, enemies_alive, scene_elements):
+    print_sleep("You are in the jailer room.")
+    options = ["Look around.", "Go back"]
+
+    if "sword" not in items:
+        print_sleep("His corpse lies on the floor.")
+        print_sleep("A sword lay by his side.")
+        print_sleep("It is bloody and a little rusty, but it will have to do.")
+        options.append("Take the sword.")
+    else:
+        print_sleep("There is nothing left to do here.")
+
+    while True:
+        selected_option = validate_option(options)
+
+        if selected_option == 1:
+            print_sleep("The room is dark")
+            print_sleep("There is a table, a chair and some other furniture.")
+            print_sleep("But there is nothing of use on them.")
+            print_sleep("There are bars on the windows.")
+        if selected_option == 2:
+            cell_block(items, health, enemies_alive, scene_elements)
+        if selected_option == 3:
+            items.append("sword")
+            options.remove("Take the sword.")
 
 
 # Starts and manages the game

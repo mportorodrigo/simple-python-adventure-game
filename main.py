@@ -97,7 +97,7 @@ def cell_block(items, health, enemies_alive, scene_elements):
     if enemies_alive[0] == True:
         if "sword" not in items:
             print_sleep("The skeleton is at the other end of the corridor.")
-            print_sleep("It has not yet noticed me.")
+            print_sleep("It has not yet noticed you.")
             print_sleep("I'd better find a weapon before fighting it.")
         else:
             print_sleep("The skeleton is at the other end of the corridor.")

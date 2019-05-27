@@ -29,7 +29,7 @@ def validate_option(options):
 
 
 # Describes the setting and start of the game
-def intro(items, health, options, enemies_alive, scene_elements):
+def intro(items, health, enemies_alive, scene_elements):
     print_sleep("You wake up, in a cell, hearing a moaning.")
     print_sleep("When you turn yourself around...")
     print_sleep("...you see behind your cell gate...")
@@ -37,16 +37,17 @@ def intro(items, health, options, enemies_alive, scene_elements):
     print_sleep("looking right at you.")
     print_sleep("It tries to open the gate, but it is locked.")
     print_sleep("It slowly walks away, as you get to your feet")
-    middle_cell(items, health, options, enemies_alive, scene_elements)
+    middle_cell(items, health, enemies_alive, scene_elements)
 
 
 # Elaborates the various scenes
-def middle_cell(items, health, options, enemies_alive, scene_elements):
+def middle_cell(items, health, enemies_alive, scene_elements):
     print_sleep("You are in your cell")
-    options.append("Open the gate.")
-    # Verifies if the wall was already broken by the player
-    if scene_elements[0] == False:
-        options.append("Check the walls.")
+    options = ["Look around.", "Try to open the gate.", "Check the walls."]
+
+    # If the wall was already broken by the player, let the player go to the next room
+    if scene_elements[0] == True:
+        options.append("Go through hole.")
 
     while True:
         selected_option = validate_option(options)
@@ -70,7 +71,7 @@ def middle_cell(items, health, options, enemies_alive, scene_elements):
                 print_sleep(
                     "The hole is big enough for a person to go through.")
         elif selected_option == 4:
-            # TODO adjacent_cell(items, health, options, enemies_alive, scene_elements)
+            # TODO adjacent_cell(items, health, enemies_alive, scene_elements)
             break
 
 
@@ -81,12 +82,11 @@ def play_game():
     health = 100
 
     # Game Logic
-    options = ["Look around."]
     enemies_alive = [True, True, True, True]  # Are the enemies alive?
     scene_elements = [False, False]  # Is the wall broken? the potion drunk?
 
     # Start the game
-    intro(items, health, options, enemies_alive, scene_elements)
+    intro(items, health, enemies_alive, scene_elements)
 
 
 play_game()

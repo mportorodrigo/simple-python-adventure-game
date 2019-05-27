@@ -9,11 +9,13 @@ def print_sleep(text):
 
 
 def validate_option(options):
+    print_sleep("Your options are:")
     # Prints all the option for the player to choose from
     i = 0
     while i < len(options):
         print(f"{i+1}. {options[i]}")
         i += 1
+    time.sleep(2)
 
     # Validates and returns the player choice
     while True:

@@ -82,7 +82,7 @@ def play_game():
 
     # Game Logic
     options = ["Look around."]
-    enemies_alive = [True, True, True, True]
+    enemies_alive = [True, True, True, True]  # Are the enemies alive?
     scene_elements = [False, False]  # Is the wall broken? the potion drunk?
 
     # Start the game

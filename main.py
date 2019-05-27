@@ -5,7 +5,7 @@ import random
 # Prints text, then wait for two seconds
 def print_sleep(text):
     print(text)
-    time.sleep(2)
+    time.sleep(0)
 
 
 def validate_option(options):
@@ -15,7 +15,7 @@ def validate_option(options):
     while i < len(options):
         print(f"{i+1}. {options[i]}")
         i += 1
-    time.sleep(2)
+    time.sleep(0)
 
     # Validates and returns the player choice
     while True:
@@ -94,22 +94,27 @@ def cell_block(items, health, enemies_alive, scene_elements):
     print_sleep("You are now in the dungeon corridor.")
     options = ["Look around", "Go to the Jailer Room"]
 
-    if enemies_alive[0] == True:
-        if "sword" not in items:
-            print_sleep("The skeleton is at the other end of the corridor.")
-            print_sleep("It has not yet noticed you.")
-            print_sleep("I'd better find a weapon before fighting it.")
-        else:
-            print_sleep("The skeleton is at the other end of the corridor.")
-            print_sleep("It has not yet noticed you.")
-            print_sleep("Now that you have a sword, you might have a chance.")
-            options.append("Fight skeleton.")
-    else:
-        options.append("Opend the door.")
-        options.append("Go through the right passage.")
-        options.append("Go through the left passage.")
-
     while True:
+        # If the skeleton has not yet been defeatd, the player can't proceed.
+        if enemies_alive[0] == True:
+            if "sword" not in items:
+                print_sleep(
+                    "The skeleton is at the other end of the corridor.")
+                print_sleep("It has not yet noticed you.")
+                print_sleep("I'd better find a weapon before fighting it.")
+            else:
+                print_sleep(
+                    "The skeleton is at the other end of the corridor.")
+                print_sleep("It has not yet noticed you.")
+                print_sleep(
+                    "Now that you have a sword, you might have a chance.")
+                options.append("Fight skeleton.")
+        else:
+            # Adds the option for the player to continue after defeating the skeleton.
+            options.append("Opend the door.")
+            options.append("Go through the right passage.")
+            options.append("Go through the left passage.")
+
         selected_option = validate_option(options)
 
         if selected_option == 1:
@@ -125,6 +130,16 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep("Or you will not be able to go out.")
         if selected_option == 2:
             jailer_room(items, health, enemies_alive, scene_elements)
+        if selected_option == 3:
+            if enemies_alive[0] == True:
+                # If the player defeats the skeleton, updates health
+                health = combat(items, health, enemies_alive, scene_elements)
+                # Updates the state of this skeleton
+                options.remove("Fight skeleton.")
+                enemies_alive[0] = False
+            else:
+                # TODO outside()
+                break
 
 
 def jailer_room(items, health, enemies_alive, scene_elements):
@@ -152,6 +167,33 @@ def jailer_room(items, health, enemies_alive, scene_elements):
         if selected_option == 3:
             items.append("sword")
             options.remove("Take the sword.")
+
+
+# Manages the combat
+def combat(items, health, enemies_alive, scene_elements):
+    enemy_health = 15
+    damage_dealt = 0
+
+    while True:
+        if health > 0:
+            print_sleep("You attack the skeleton.")
+            damage_dealt = random.randint(1, 6)
+            enemy_health -= damage_dealt
+            print_sleep(f"You have caused {damage_dealt} points of damage.")
+            print_sleep(f"It has {enemy_health} health points left.")
+        else:
+            print_sleep("The skeleton killed you.")
+            return
+
+        if enemy_health > 0:
+            print_sleep("The skeleton attacks you.")
+            damage_dealt = random.randint(1, 6)
+            health -= damage_dealt
+            print_sleep(f"It has caused {damage_dealt} points of damage.")
+            print_sleep(f"You have {health} health points left.")
+        else:
+            print_sleep("You have defeated the skeleton.")
+            return health
 
 
 # Starts and manages the game

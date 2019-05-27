@@ -64,7 +64,7 @@ def middle_cell():
             else:
                 print_sleep("The loose bricks fell.")
                 print_sleep(
-                    "The hole is big enough for a person to go through")
+                    "The hole is big enough for a person to go through.")
         elif selected_option == 4:
             # TODO adjacent_cell()
             break

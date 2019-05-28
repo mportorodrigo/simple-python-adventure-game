@@ -108,7 +108,8 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep("It has not yet noticed you.")
                 print_sleep(
                     "Now that you have a sword, you might have a chance.")
-                options.append("Fight skeleton.")
+                if "Fight skeleton." not in options:
+                    options.append("Fight skeleton.")
         elif "Open the door." not in options:
             # Adds the option for the player to continue after defeating the skeleton.
             options.append("Open the door.")
@@ -146,7 +147,6 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep(
                     "Luckly, the prision is by the edge of the village.")
                 print_sleep("So you manage to scape unoticed.")
-                print_sleep("Thank you for playing.")
                 play_again()
             else:
                 print_sleep("The door is locked.")
@@ -245,9 +245,10 @@ def play_again():
 
     while True:
         if selected_option == 1:
-            play_again()
+            play_game()
         elif selected_option == 2:
-            break
+            print_sleep("Thank you for playing.")
+            exit()
 
 
 # Starts and manages the game

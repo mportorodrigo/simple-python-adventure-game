@@ -10,21 +10,25 @@ def print_sleep(text):
 
 def validate_option(options):
     # Prints all the option for the player to choose from
+    print_sleep("What would you like to do?")
     i = 0
     while i < len(options):
         print(f"{i+1}. {options[i]}")
         i += 1
-    time.sleep(2)
 
     # Validates and returns the player choice
     while True:
-        selected_option = input("What would you like to do?\n")
-        selected_option = int(selected_option)
+        selected_option = input(f"Type a number from 1 to {i}\n")
 
-        if selected_option > 0 and selected_option <= len(options):
-            return selected_option
-        else:
-            print_sleep("That is not a valid option.")
+        try:
+            selected_option = int(selected_option)
+
+            if selected_option > 0 and selected_option <= len(options):
+                return selected_option
+            else:
+                print_sleep("That is not a valid option.")
+        except ValueError:
+            print_sleep("That is not a number.")
 
 
 # Describes the setting and start of the game

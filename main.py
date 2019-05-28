@@ -152,8 +152,7 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep("The door is locked.")
                 print_sleep("You have to find the key.")
         elif selected_option == 4:
-            # TODO guard_house(items, health, enemies_alive, scene_elements)
-            break
+            guard_house(items, health, enemies_alive, scene_elements)
         elif selected_option == 5:
             # TODO kitchen(items, health, enemies_alive, scene_elements)
             break
@@ -186,6 +185,27 @@ def jailer_room(items, health, enemies_alive, scene_elements):
             print_sleep("Now you might have a chance to scape.")
             items.append("sword")
             options.remove("Take the sword.")
+
+
+def guard_house(items, health, enemies_alive, scene_elements):
+    print_sleep("You are in the guard house.")
+    options = ["Look around.", "Go back"]
+
+    while True:
+        selected_option = validate_option(options)
+
+        if selected_option == 1:
+            print_sleep("There are a couple of beds.")
+            print_sleep("And nobody in sight.")
+            print_sleep("The guard must have run away.")
+            if scene_elements[1] == False:  # If the potion was not yet drunk
+                print_sleep("The only useful thing you find is a potion.")
+                print_sleep("As you drink it, you fell better.")
+                print_sleep("Back to full health.")
+                scene_elements[1] = True
+                health = 30
+        elif selected_option == 2:
+            cell_block(items, health, enemies_alive, scene_elements)
 
 
 # Manages the combat

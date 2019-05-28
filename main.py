@@ -154,8 +154,7 @@ def cell_block(items, health, enemies_alive, scene_elements):
         elif selected_option == 4:
             guard_house(items, health, enemies_alive, scene_elements)
         elif selected_option == 5:
-            # TODO kitchen(items, health, enemies_alive, scene_elements)
-            break
+            kitchen(items, health, enemies_alive, scene_elements)
 
 
 def jailer_room(items, health, enemies_alive, scene_elements):
@@ -204,6 +203,33 @@ def guard_house(items, health, enemies_alive, scene_elements):
                 print_sleep("Back to full health.")
                 scene_elements[1] = True
                 health = 30
+        elif selected_option == 2:
+            cell_block(items, health, enemies_alive, scene_elements)
+
+
+def kitchen(items, health, enemies_alive, scene_elements):
+    print_sleep("You are in the kitchen.")
+    options = ["Look around.", "Go back"]
+
+    if enemies_alive[1] == True:
+        print_sleep("As you enter, a skeleton attacks you.")
+        print_sleep("You avoid its first attack.")
+        print_sleep("But you can't escape. You have to face it.")
+        combat(items, health, enemies_alive, scene_elements)
+        enemies_alive[1] = False
+
+    while True:
+        selected_option = validate_option(options)
+
+        if selected_option == 1:
+            print_sleep("There are several cooking utensils.")
+            print_sleep("Nothing particularly interesting.")
+            if "key" not in items:
+                print_sleep("As you look around, you find a key on the table.")
+                print_sleep("It must open the front door!")
+                items.append("key")
+            else:
+                print_sleep("There is nothing left to do here.")
         elif selected_option == 2:
             cell_block(items, health, enemies_alive, scene_elements)
 

@@ -215,7 +215,7 @@ def kitchen(items, health, enemies_alive, scene_elements):
         print_sleep("As you enter, a skeleton attacks you.")
         print_sleep("You avoid its first attack.")
         print_sleep("But you can't escape. You have to face it.")
-        combat(items, health, enemies_alive, scene_elements)
+        health = combat(items, health, enemies_alive, scene_elements)
         enemies_alive[1] = False
 
     while True:

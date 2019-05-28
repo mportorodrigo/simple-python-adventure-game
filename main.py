@@ -109,9 +109,9 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep(
                     "Now that you have a sword, you might have a chance.")
                 options.append("Fight skeleton.")
-        else:
+        elif "Open the door." not in options:
             # Adds the option for the player to continue after defeating the skeleton.
-            options.append("Opend the door.")
+            options.append("Open the door.")
             options.append("Go through the right passage.")
             options.append("Go through the left passage.")
 
@@ -128,18 +128,35 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep("The skeleton is there.")
                 print_sleep("You will have to defeat it.")
                 print_sleep("Or you will not be able to go out.")
-        if selected_option == 2:
+        elif selected_option == 2:
             jailer_room(items, health, enemies_alive, scene_elements)
-        if selected_option == 3:
+        elif selected_option == 3:
             if enemies_alive[0] == True:
                 # If the player defeats the skeleton, updates health
                 health = combat(items, health, enemies_alive, scene_elements)
                 # Updates the state of this skeleton
                 options.remove("Fight skeleton.")
                 enemies_alive[0] = False
+            elif "key" in items:
+                print_sleep("You unlock the door.")
+                print_sleep("As you open it, you see a small village.")
+                print_sleep("No villagers in sight.")
+                print_sleep("Only dead bodies.")
+                print_sleep("And many skeletons about.")
+                print_sleep(
+                    "Luckly, the prision is by the edge of the village.")
+                print_sleep("So you manage to scape unoticed.")
+                print_sleep("Thank you for playing.")
+                play_again()
             else:
-                # TODO outside()
-                break
+                print_sleep("The door is locked.")
+                print_sleep("You have to find the key.")
+        elif selected_option == 4:
+            # TODO guard_house(items, health, enemies_alive, scene_elements)
+            break
+        elif selected_option == 5:
+            # TODO kitchen(items, health, enemies_alive, scene_elements)
+            break
 
 
 def jailer_room(items, health, enemies_alive, scene_elements):
@@ -162,9 +179,9 @@ def jailer_room(items, health, enemies_alive, scene_elements):
             print_sleep("There is a table, a chair and some other furniture.")
             print_sleep("But there is nothing of use on them.")
             print_sleep("There are bars on the windows.")
-        if selected_option == 2:
+        elif selected_option == 2:
             cell_block(items, health, enemies_alive, scene_elements)
-        if selected_option == 3:
+        elif selected_option == 3:
             print_sleep("You take the sword.")
             print_sleep("Now you might have a chance to scape.")
             items.append("sword")

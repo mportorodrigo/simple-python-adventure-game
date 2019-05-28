@@ -5,17 +5,16 @@ import random
 # Prints text, then wait for two seconds
 def print_sleep(text):
     print(text)
-    time.sleep(0)
+    time.sleep(2)
 
 
 def validate_option(options):
-    print_sleep("Your options are:")
     # Prints all the option for the player to choose from
     i = 0
     while i < len(options):
         print(f"{i+1}. {options[i]}")
         i += 1
-    time.sleep(0)
+    time.sleep(2)
 
     # Validates and returns the player choice
     while True:
@@ -36,13 +35,13 @@ def intro(items, health, enemies_alive, scene_elements):
     print_sleep("...a skeleton!")
     print_sleep("looking right at you.")
     print_sleep("It tries to open the gate, but it is locked.")
-    print_sleep("It slowly walks away, as you get to your feet")
+    print_sleep("It slowly walks away, as you get to your feet.")
     middle_cell(items, health, enemies_alive, scene_elements)
 
 
 # Elaborates the various scenes
 def middle_cell(items, health, enemies_alive, scene_elements):
-    print_sleep("You are in your cell")
+    print_sleep("You are in your cell.")
     options = ["Look around.", "Try to open the gate.", "Check the walls."]
 
     # If the wall was already broken by the player, let the player go to the next room
@@ -55,14 +54,15 @@ def middle_cell(items, health, enemies_alive, scene_elements):
         if selected_option == 1:
             print_sleep("You look around your cell.")
             print_sleep("The bars are rust, but still strong.")
-            print_sleep("There is no window.")
-            print_sleep("The wall seems very old.")
+            print_sleep("There are no windows.")
+            print_sleep("The walls seem to be very old.")
         elif selected_option == 2:
             print_sleep("It is locked.")
         elif selected_option == 3:
             if scene_elements[0] == False:  # Verifies if the wall is broken
-                print_sleep("The wall are old and some bricks seems loose.")
-                print_sleep("As you force it, a portion of the wall crumbles.")
+                print_sleep("The walls are old and some bricks seems loose.")
+                print_sleep(
+                    "As you force the loose bricks, a portion of the wall crumbles.")
                 print_sleep("The hole is enough for you to pass through.")
                 options.append("Go through hole.")
                 scene_elements[0] = True  # Updates the state of the wall
@@ -92,7 +92,7 @@ def adjacent_cell(items, health, enemies_alive, scene_elements):
 
 def cell_block(items, health, enemies_alive, scene_elements):
     print_sleep("You are now in the dungeon corridor.")
-    options = ["Look around", "Go to the Jailer Room"]
+    options = ["Look around.", "Go to the Jailer Room."]
 
     while True:
         # If the skeleton has not yet been defeatd, the player can't proceed.
@@ -101,7 +101,7 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 print_sleep(
                     "The skeleton is at the other end of the corridor.")
                 print_sleep("It has not yet noticed you.")
-                print_sleep("I'd better find a weapon before fighting it.")
+                print_sleep("You'd better find a weapon before fighting it.")
             else:
                 print_sleep(
                     "The skeleton is at the other end of the corridor.")
@@ -120,7 +120,7 @@ def cell_block(items, health, enemies_alive, scene_elements):
 
         if selected_option == 1:
             print_sleep("You can see that there are only two cells here.")
-            print_sleep("Yours and the one you just came out of.")
+            print_sleep("Yours and the one you came out of.")
             print_sleep("The jailer room is at the end of this corridor.")
             print_sleep("There is a door that leads outside at the other end.")
             print_sleep(
@@ -159,7 +159,7 @@ def cell_block(items, health, enemies_alive, scene_elements):
 
 def jailer_room(items, health, enemies_alive, scene_elements):
     print_sleep("You are in the jailer room.")
-    options = ["Look around.", "Go back"]
+    options = ["Look around.", "Go back."]
 
     if "sword" not in items:
         print_sleep("His corpse lies on the floor.")
@@ -173,7 +173,7 @@ def jailer_room(items, health, enemies_alive, scene_elements):
         selected_option = validate_option(options)
 
         if selected_option == 1:
-            print_sleep("The room is dark")
+            print_sleep("The room is dark.")
             print_sleep("There is a table, a chair and some other furniture.")
             print_sleep("But there is nothing of use on them.")
             print_sleep("There are bars on the windows.")
@@ -181,14 +181,14 @@ def jailer_room(items, health, enemies_alive, scene_elements):
             cell_block(items, health, enemies_alive, scene_elements)
         elif selected_option == 3:
             print_sleep("You take the sword.")
-            print_sleep("Now you might have a chance to scape.")
+            print_sleep("Now you might have a chance to escape.")
             items.append("sword")
             options.remove("Take the sword.")
 
 
 def guard_house(items, health, enemies_alive, scene_elements):
     print_sleep("You are in the guard house.")
-    options = ["Look around.", "Go back"]
+    options = ["Look around.", "Go back."]
 
     while True:
         selected_option = validate_option(options)
@@ -196,7 +196,7 @@ def guard_house(items, health, enemies_alive, scene_elements):
         if selected_option == 1:
             print_sleep("There are a couple of beds.")
             print_sleep("And nobody in sight.")
-            print_sleep("The guard must have run away.")
+            print_sleep("The guards must have ran away.")
             if scene_elements[1] == False:  # If the potion was not yet drunk
                 print_sleep("The only useful thing you find is a potion.")
                 print_sleep("As you drink it, you fell better.")
@@ -209,7 +209,7 @@ def guard_house(items, health, enemies_alive, scene_elements):
 
 def kitchen(items, health, enemies_alive, scene_elements):
     print_sleep("You are in the kitchen.")
-    options = ["Look around.", "Go back"]
+    options = ["Look around.", "Go back."]
 
     if enemies_alive[1] == True:
         print_sleep("As you enter, a skeleton attacks you.")
@@ -248,7 +248,7 @@ def combat(items, health, enemies_alive, scene_elements):
             print_sleep(f"It has {enemy_health} health points left.")
         else:
             print_sleep("Your vision darkens as your life escapes you.")
-            print_sleep("You didn't manage to scape the dungen this time.")
+            print_sleep("You didn't manage to escape the dungen this time.")
             play_again()
 
         if enemy_health > 0:
@@ -281,7 +281,7 @@ def play_again():
 def play_game():
     # Player statistics
     items = []
-    health = 30
+    health = 25
 
     # Game Logic
     enemies_alive = [True, True]  # Are the enemies alive?

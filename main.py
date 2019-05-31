@@ -2,21 +2,30 @@ import time
 import random
 
 
-# Prints text, then wait for two seconds
 def print_sleep(text):
+    """Print a message, then wait two seconds"""
     print(text)
     time.sleep(2)
 
 
 def validate_option(options):
-    # Prints all the option for the player to choose from
+    """
+    Print options and validate answer.
+
+    Parameters:
+        options (list): A list with avaiable options.
+
+    Returns:
+        selected_option (int): Number representing chosen option.
+    """
+
     print_sleep("What would you like to do?")
+
     i = 0
     while i < len(options):
         print(f"{i+1}. {options[i]}")
         i += 1
 
-    # Validates and returns the player choice
     while True:
         selected_option = input(f"Type a number from 1 to {i}\n")
 
@@ -31,8 +40,19 @@ def validate_option(options):
             print_sleep("That is not a number.")
 
 
-# Describes the setting and start of the game
 def intro(items, health, enemies_alive, scene_elements):
+    """
+    Display introductory text for the game, takes on several parameters
+    and pass them as parameters for other functions, updating the state
+    and progress of the game.
+
+    Parameters:
+        items (list): Store player items.
+        health (int): Store player health points.
+        enemies_alive (list): Store the current state of enemies.
+        scene_elements (list): Store interaction state of scene elements.
+    """
+
     print_sleep("You wake up, in a cell, hearing a moaning.")
     print_sleep("When you turn yourself around...")
     print_sleep("...you see behind your cell gate...")
@@ -40,11 +60,14 @@ def intro(items, health, enemies_alive, scene_elements):
     print_sleep("looking right at you.")
     print_sleep("It tries to open the gate, but it is locked.")
     print_sleep("It slowly walks away, as you get to your feet.")
-    middle_cell(items, health, enemies_alive, scene_elements)
+    player_cell(items, health, enemies_alive, scene_elements)
 
 
-# Elaborates the various scenes
-def middle_cell(items, health, enemies_alive, scene_elements):
+### The following function serve as scenes for the game ###
+
+def player_cell(items, health, enemies_alive, scene_elements):
+    """Describes the ocurrencies in the player cell scene."""
+
     print_sleep("You are in your cell.")
     options = ["Look around.", "Try to open the gate.", "Check the walls."]
 
@@ -79,6 +102,8 @@ def middle_cell(items, health, enemies_alive, scene_elements):
 
 
 def adjacent_cell(items, health, enemies_alive, scene_elements):
+    """Describes the ocurrencies in the adjacent cell."""
+
     print_sleep("You find yourself in the adjacent cell.")
     print_sleep("It looks much the same as your cell.")
     options = ["Open the gate.", "Go back to your cell."]
@@ -91,10 +116,12 @@ def adjacent_cell(items, health, enemies_alive, scene_elements):
             print_sleep("You go out of the cell.")
             cell_block(items, health, enemies_alive, scene_elements)
         elif selected_option == 2:
-            middle_cell(items, health, enemies_alive, scene_elements)
+            player_cell(items, health, enemies_alive, scene_elements)
 
 
 def cell_block(items, health, enemies_alive, scene_elements):
+    """Describes the ocurrencies in the player cell block."""
+
     print_sleep("You are now in the dungeon corridor.")
     options = ["Look around.", "Go to the Jailer Room."]
 
@@ -162,6 +189,8 @@ def cell_block(items, health, enemies_alive, scene_elements):
 
 
 def jailer_room(items, health, enemies_alive, scene_elements):
+    """Describes the ocurrencies in the player jailer room."""
+
     print_sleep("You are in the jailer room.")
     options = ["Look around.", "Go back."]
 
@@ -191,6 +220,8 @@ def jailer_room(items, health, enemies_alive, scene_elements):
 
 
 def guard_house(items, health, enemies_alive, scene_elements):
+    """Describes the ocurrencies in the player guard house."""
+
     print_sleep("You are in the guard house.")
     options = ["Look around.", "Go back."]
 
@@ -212,6 +243,8 @@ def guard_house(items, health, enemies_alive, scene_elements):
 
 
 def kitchen(items, health, enemies_alive, scene_elements):
+    """Describes the ocurrencies in the player kitchen."""
+
     print_sleep("You are in the kitchen.")
     options = ["Look around.", "Go back."]
 
@@ -238,8 +271,26 @@ def kitchen(items, health, enemies_alive, scene_elements):
             cell_block(items, health, enemies_alive, scene_elements)
 
 
-# Manages the combat
+### End of scene based functions ###
+
 def combat(items, health, enemies_alive, scene_elements):
+    """
+    Simulates combat between the player and enemies by randomly
+    choosing a number to subtract from their health points, updating
+    the current state to the player through text messages.
+    If the enemy is defeated, returns the player remaining health,
+    otherwise, call play_again().
+
+    Parameters:
+        items (list): Store player items.
+        health (int): Store player health points.
+        enemies_alive (list): Store the current state of enemies.
+        scene_elements (list): Store interaction state of scene elements.
+
+    Returns:
+        health (int): Returns the remaining health of the player.
+    """
+
     enemy_health = 15
     damage_dealt = 0
 
@@ -266,8 +317,8 @@ def combat(items, health, enemies_alive, scene_elements):
             return health
 
 
-# Give the player the option to play again
 def play_again():
+    """Ask the player if he wants to play again."""
     options = ["Yes", "No"]
     print_sleep("Would you like to play again?")
 
@@ -281,8 +332,9 @@ def play_again():
             exit()
 
 
-# Starts and manages the game
 def play_game():
+    """Starts and manages the game."""
+
     # Player statistics
     items = []
     health = 25
@@ -291,8 +343,8 @@ def play_game():
     enemies_alive = [True, True]  # Are the enemies alive?
     scene_elements = [False, False]  # Is the wall broken? the potion drunk?
 
-    # Start the game
     intro(items, health, enemies_alive, scene_elements)
 
 
+# Start the game
 play_game()

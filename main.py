@@ -63,7 +63,7 @@ def intro(items, health, enemies_alive, scene_elements):
     player_cell(items, health, enemies_alive, scene_elements)
 
 
-### The following function serve as scenes for the game ###
+# The following function serve as scenes for the game
 
 def player_cell(items, health, enemies_alive, scene_elements):
     """Describes the ocurrencies in the player cell scene."""
@@ -271,7 +271,7 @@ def kitchen(items, health, enemies_alive, scene_elements):
             cell_block(items, health, enemies_alive, scene_elements)
 
 
-### End of scene based functions ###
+# End of scene based functions
 
 def combat(items, health, enemies_alive, scene_elements):
     """

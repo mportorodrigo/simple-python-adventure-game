@@ -5,7 +5,7 @@ import random
 # Prints text, then wait for two seconds
 def print_sleep(text):
     print(text)
-    time.sleep(0)
+    time.sleep(2)
 
 
 def validate_option(options):
@@ -48,7 +48,7 @@ def middle_cell(items, health, enemies_alive, scene_elements):
     print_sleep("You are in your cell.")
     options = ["Look around.", "Try to open the gate.", "Check the walls."]
 
-    # If the wall was already broken by the player, let the player go to the next room
+    # If the player already broke the wall, let him through
     if scene_elements[0] is True:
         options.append("Go through hole.")
 
@@ -65,8 +65,8 @@ def middle_cell(items, health, enemies_alive, scene_elements):
         elif selected_option == 3:
             if scene_elements[0] is False:  # Verifies if the wall is broken
                 print_sleep("The walls are old and some bricks seems loose.")
-                print_sleep(
-                    "As you force the loose bricks, a portion of the wall crumbles.")
+                print_sleep("As you force the loose bricks,")
+                print_sleep("a portion of the wall crumbles.")
                 print_sleep("The hole is enough for you to pass through.")
                 options.append("Go through hole.")
                 scene_elements[0] = True  # Updates the state of the wall
@@ -115,7 +115,7 @@ def cell_block(items, health, enemies_alive, scene_elements):
                 if "Fight skeleton." not in options:
                     options.append("Fight skeleton.")
         elif "Open the door." not in options:
-            # Adds the option for the player to continue after defeating the skeleton.
+            # Adds the option to continue after defeating the skeleton.
             options.append("Open the door.")
             options.append("Go through the right passage.")
             options.append("Go through the left passage.")

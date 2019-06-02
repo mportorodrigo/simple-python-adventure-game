@@ -10,4 +10,4 @@ $ python3 main.py
 ~~~~
 
 ## License
-simple-python-adventure-game is Copyright © 2019 Rodrigo Porto. It is a free software and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
+simple-python-adventure-game is Copyright © 2019 Rodrigo Porto. It is a free software and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
